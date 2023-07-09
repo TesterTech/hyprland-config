@@ -1,22 +1,27 @@
 #!/bin/bash
 
-export PATH="${PATH}:${HOME}/.local/bin/"
+#export PATH="${PATH}:${HOME}/.local/bin/"
 
-DIR=$HOME/Wallpapers
+DIR=$HOME/Pictures/Wallpapers
 PICS=($(ls ${DIR}))
 
 RANDOMPICS=${PICS[ $RANDOM % ${#PICS[@]} ]}
+
+echo ">> ${RANDOMPICS}"
 
 if [[ $(pidof swww) ]]; then
   pkill swww
 fi
 
 # swww init
-swww img ${DIR}/${RANDOMPICS} --transition-type grow --transition-fps 60 --transition-duration 1.0 --transition-pos 0.810,0.972 --transition-bezier 0.65,0,0.35,1 --transition-step 255
-wal -i ${DIR}/${RANDOMPICS} --cols16
-pywalfox update
-pywal-discord -t default
+# For Fedora copr:copr.fedorainfracloud.org:alebastr:sway-extras   Copr repo for sway-extras owned by alebastr
+echo ">> swww ${DIR}/${RANDOMPICS} "
+swww img ${DIR}/${RANDOMPICS} --transition-type grow --transition-fps 60 --transition-duration 0.5 --transition-pos 0.810,0.972 --transition-bezier 0.65,0,0.35,1 --transition-step 255
 
-. $HOME/.config/mako/update-colors.sh
-. $HOME/.config/spicetify/Themes/Pywal/update-colors.sh
-. $HOME/.config/cava/scripts/update-colors.sh
+echo "[script: wallpaper.sh]>> Go call the pywal.sh script for ${DIR}/${RANDOMPICS} with --cols16 "
+source ${HOME}/scripts/pywal.sh "${DIR}/${RANDOMPICS}" --cols16
+
+sleep 1s
+echo ">> Update the fox"
+pywalfox update
+

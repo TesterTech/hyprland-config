@@ -1,9 +1,11 @@
 {
-    "height": 20, // Waybar height (to be removed for auto height)
+    "height": 24, // Waybar height (to be removed for auto height)
     "layer": "top", // Waybar at top layer
-    "modules-left": ["custom/launcher", "cpu", "memory", "custom/spotify", "battery"],
-    "modules-center": ["wlr/workspaces"],
+    "modules-left": ["custom/launcher", "cpu", "memory", "wlr/workspaces"],
+    "modules-center": ["hyprland/window"],
     "modules-right": [
+        "custom/weather",
+        "battery",
         "tray",
         "custom/wallpaper",
         "bluetooth",
@@ -14,12 +16,21 @@
         "custom/power-menu"
     ],
     "wlr/workspaces": {
-        "format": "{icon}",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "all-outputs": true,
         "on-click": "activate",
+        "format": "{icon}",
         "format-icons": {
-            "active": " 󰮯",
-            "default": "󰊠"
-        }
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "urgent": "",
+            "active": "",
+            "default": ""
+          }
     },
     "hyprland/window": {
         "format": "{}"
@@ -37,7 +48,7 @@
     },
     "bluetooth": {
         "format": "",
-        "on-click": "blueberry"
+        "on-click": "kitty bluetoothctl"
     },
     "cpu": {
         "interval": 10,
@@ -100,29 +111,21 @@
         "tooltip": true
     },
     "custom/weather": {
-        "exec": "python3 ~/.config/waybar/scripts/weather.py",
+        "exec": "python ~/.config/waybar/scripts/wtr.py",
         "restart-interval": 300,
         "return-type": "json"
     },
-    "custom/spotify": {
-        "exec": "python3 ~/.config/waybar/scripts/mediaplayer.py --player spotify",
-        "format": "  {}",
-        "return-type": "json",
-        "on-click": "playerctl play-pause",
-        "on-scroll-up": "playerctl next",
-        "on-scroll-down": "playerctl previous"
-    },
     "custom/power-menu": {
         "format": " ⏻ ",
-        "on-click": "~/.config/polybar/hack/scripts/powermenu.sh"
+        "on-click": "~/.config/waybar/scripts/powermenu.sh"
     },
     "custom/launcher": {
-        "format": " ",
-        "on-click": "~/.config/polybar/hack/scripts/launcher.sh"
+        "format": " ",
+        "on-click": "~/.config/waybar/scripts/launcher.sh"
     },
     "custom/wallpaper": {
         "format": "",
-        "on-click": "~/.config/rofi/scripts/wallpaper",
+        "on-click": "~/.config/waybar/scripts/wallpaper.sh",
         "on-click-right": "~/.config/waybar/scripts/wallpaper.sh"
     }
 }

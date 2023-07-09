@@ -1,7 +1,8 @@
-@import 'colors-waybar.css';
+/* Tricky, could be on another path. */
+@import '../../.cache/wal/colors-waybar.css';
 
 * {
-    font-family: CartographCF Nerd Font, Iosevka Nerd Font;
+    font-family: Iosevka Nerd Font;
     font-size: 14px;
 }
 
@@ -16,9 +17,6 @@ window#waybar.hidden {
     opacity: 0.1;
 }
 
-#window {
-    color: @foreground;
-}
 
 #clock,
 #cpu,
@@ -34,6 +32,7 @@ window#waybar.hidden {
 #custom-launcher,
 #custom-spotify,
 #custom-weather,
+#window,
 #custom-weather.severe,
 #custom-weather.sunnyDay,
 #custom-weather.clearNight,
@@ -52,7 +51,7 @@ window#waybar.hidden {
 }
 
 #custom-launcher {
-    color: @color9;
+    color: @color13;
     padding: 0 12px 0 16px;
     margin-left: 8px;
 }
@@ -166,6 +165,11 @@ window#waybar.hidden {
     font-weight: bold;
 }
 
+#window {
+    color: @color12;
+    font-weight: bold;
+}
+
 #custom-power-menu {
     color: @color11;
     margin-right: 8px;
@@ -180,10 +184,11 @@ window#waybar.hidden {
 }
 
 tooltip {
-    border-radius: 15px;
-    padding: 15px;
+    border-radius: 4px;
+    padding: 4px;
+    color: @foreground;
     background-color: @background;
-    font-family: CartographCF Nerd Font;
+    /*font-family: CartographCF Nerd Font;*/
 }
 
 tooltip label {
